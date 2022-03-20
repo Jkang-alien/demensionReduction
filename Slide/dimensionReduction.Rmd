@@ -1,0 +1,296 @@
+---
+title: "Dimension Reduction"
+author: 
+  - "Jun Kang"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      beforeInit: "macro.js"
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  #fig.width=9, fig.height=5.5, fig.retina=3,
+  #out.width = "100%",
+  cache = TRUE,
+  echo = FALSE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#1381B0",
+  secondary_color = "#FF961C",
+  inverse_header_color = "#FFFFFF",
+  text_font_size = "1.6rem"
+)
+```
+
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig4_HTML.png?as=webp)
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+The Genome Aggregation Database (gnomAD, left) and Biobank Japan (BBJ, right) visualized using UMAP. UMAP illustrates the ancestral diversity of gnomAD, showing many the relationships between populations on continental and subcontinental levels. For the relatively more homogeneous BBJ data, it splits data geographically into the large mainland cluster (consisting of Hokkaido, Tohoku, Kanto-Koshinetsu, Chubu-Hokuriku, Kinki, and Kyushu regions), and smaller non-mainland clusters. The gnomAD image is reproduced from [10], and the BBJ image is reproduced from [12]
+
+---
+# High dimensional data
+
+* Population genetics
+* Single cell sequencing
+* Spatial transcriptomics 
+
+---
+### Dimension reduction technique
+
+* Principal component analysis (PCA)
+* t-Distributed Stochastic Neighbor Embedding (t-SNE)
+* Uniform Manifold Approximation and Projection (UMAP)
+
+---
+### Dimension reduction
+
+* Change and select basis to clustering 
+* Visualization in 2 dimensional space
+
+---
+### Concepts
+
+* Dimension
+* Basis
+* Projection
+* Latent variable (Manifold)
+* Linearity
+* Graph
+
+---
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig3_HTML.png?as=webp)
+
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+PCA (left) and UMAP (right) projections of the UKB data, coloured by self-identified ethnic background. Unlike PCA, UMAP focuses on preserving local relationships and emphasizes fine-scale patterns in data. Groups in the UMAP projection are less compressed showing, for example, the relative size of the British and Irish populations in the UKB, alongside populations of other ancestries, while simultaneously showing the population structure between and within groups
+
+---
+class: center
+
+![:scale 50%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig5_HTML.png?as=webp)
+
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+UMAP projection of the same genotype data from the 1000GP comparing parametrization with a small (top) and large (bottom) number of nearest neighbours. Left images are coloured by population; right images are the same points but with the simplicial complex drawn. When adding more neighbours, subclusters become less separated, as with the LWK population, for example. Looking at the connectivity maps, we see new connections between continental groups, such as the Central/South American clusters and East Asian clusters. Darker lines indicate that individuals are closer to each other in genotype space
+
+---
+# Iris
+![](https://machinelearninghd.com/wp-content/uploads/2021/03/iris-dataset.png)
+---
+class: center
+## Iris data
+```{r iris}
+xfun::cache_rds({
+library(tidyverse)
+library(stats) 
+data(iris) 
+X <- subset(iris, select = -c(Species)) 
+axis = list(showline=FALSE, 
+            zeroline=FALSE, 
+            gridcolor='#ffff', 
+            ticklen=4)
+fig <- iris %>%  
+  plot_ly()  %>%  
+  add_trace(  
+    type = 'splom',  
+    dimensions = list( 
+      list(label = 'sepal_width',values=~Sepal.Width),  
+      list(label = 'sepal_length',values=~Sepal.Length),  
+      list(label ='petal_width',values=~Petal.Width),  
+      list(label = 'petal_length',values=~Petal.Length)),  
+    color = ~Species, colors = c('#636EFA','#EF553B','#00CC96') 
+  ) 
+figRaw <- fig %>% 
+  layout( 
+    legend=list(title=list(text='species')), 
+    hovermode='closest', 
+    dragmode= 'select', 
+    plot_bgcolor='rgba(240,240,240,0.95)', 
+    xaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    yaxis=list(domain=NULL, showline=F, zeroline=F, gridcolor='#ffff', ticklen=4), 
+    xaxis2=axis, 
+    xaxis3=axis, 
+    xaxis4=axis, 
+    yaxis2=axis, 
+    yaxis3=axis, 
+    yaxis4=axis 
+  ) 
+})
+```
+???
+clustering 가장 좋은 2개 basis? petal 1 개?
+
+
+---
+## Dimension reducsion by human selection
+```{r}
+iris %>%
+  ggplot(aes(x=Petal.Length, y=Petal.Width))+
+  geom_point()
+```
+
+---
+
+## Clustering? and select one dimension
+
+```{r, fig.height=7, fig.width=7}
+iris %>%
+  ggplot(aes(x=Petal.Length, y=Petal.Width))+
+  geom_point()
+```
+
+---
+## Principal component analysis (PCA)
+
+![](https://ww.namu.la/s/b6449edffc0739e1fc33baf28957ae33718d8cba8dc3b5d7bb5e56c02a5abd1a4c4864d9dac8423ed5c2f2dfce0d0c14ad4a0acc1a93c3a9702fb36b0220f234b56a51de56baed232418d2a4b4f07e555cfbd30698a6ff5f11cf2a68fec01690)
+---
+## Linearity
+
+$$
+PC1 = \alpha_1v_1 + \alpha_2v_2 + \alpha_3v_3 ... \\\
+PC2 = \beta_2v_1 + \beta_2v_2 + \beta_3v_3 ... \\
+$$ 
+
+---
+class: center
+# Projection
+
+![:scale 50%](https://cdn.pixabay.com/photo/2017/09/08/15/31/marigold-2729124_1280.jpg)
+
+---
+# Orthogonality
+
+* PCs are orthogonal each other
+
+---
+# Principal component analysis (PCA)
+
+```{r}
+library(plotly)
+library(ggfortify)
+
+df <- iris[1:4]
+pca_res <- prcomp(df, scale. = TRUE)
+
+p <- autoplot(pca_res, data = iris, colour = 'Species')
+
+ggplotly(p)
+```
+
+---
+# Latent variable
+* Linear
+* Non-linear
+* Manifold
+* Graph
+
+---
+# Non-linear
+
+![](http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA_files/linear_vs_nonlinear.png)
+
+.footer[http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA/]
+---
+## Non-linear
+
+* Lower dimension to higher dimension
+* Gausian Kernel
+
+---
+class .center
+
+### Simplicial complex
+![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
+---
+
+## Graph Embedding
+
+![](https://gearons.org/assets/img/mage_example.png)
+
+.footer[https://gearons.org/blog/2016/MAGE/]
+
+---
+## Graph
+
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_raw_data.png)
+
+.footer[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html]
+
+---
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_open_cover.png)
+
+---
+## Graph
+
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_basic_graph.png)
+---
+## Graph
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_open_cover.png)
+---
+# Graph
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_graph.png)
+---
+## t-Distributed Stochastic Neighbor Embedding (t-SNE)
+```{r tsne}
+xfun::cache_rds({
+  library(tsne)
+
+features <- subset(iris, select = -c(Species)) 
+
+set.seed(0)
+tsne <- tsne(features, initial_dims = 2)
+tsne <- data.frame(tsne)
+pdb <- cbind(tsne,iris$Species)
+options(warn = -1)
+figTsne <-  plot_ly(data = pdb ,x =  ~X1, y = ~X2, type = 'scatter', mode = 'markers', split = ~iris$Species)
+
+figTsne <- figTsne %>%
+  layout(
+    plot_bgcolor = "#e5ecf6"
+  )
+})
+```
+
+---
+## Uniform Manifold Approximation and Projection (UMAP)
+```{r umap}
+xfun::cache_rds({
+  library(umap) 
+iris.data = iris[, grep("Sepal|Petal", colnames(iris))] 
+iris.labels = iris[, "Species"] 
+iris.umap = umap(iris.data, n_components = 2, random_state = 15) 
+layout <- iris.umap[["layout"]] 
+layout <- data.frame(layout) 
+final <- cbind(layout, iris$Species) 
+
+figUmap <- plot_ly(final, x = ~X1, y = ~X2, color = ~iris$Species, colors = c('#636EFA','#EF553B','#00CC96'), type = 'scatter', mode = 'markers')%>%  
+  layout(
+    plot_bgcolor = "#e5ecf6",
+    legend=list(title=list(text='species')), 
+    xaxis = list( 
+      title = "0"),  
+    yaxis = list( 
+      title = "1")) 
+})
+```
+
+

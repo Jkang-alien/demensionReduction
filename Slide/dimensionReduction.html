@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Dimension Reduction</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jun Kang" />
+    <meta name="date" content="2022-03-20" />
+    <script src="dimensionReduction_files/header-attrs/header-attrs.js"></script>
+    <script src="dimensionReduction_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="dimensionReduction_files/plotly-binding/plotly.js"></script>
+    <script src="dimensionReduction_files/typedarray/typedarray.min.js"></script>
+    <script src="dimensionReduction_files/jquery/jquery.min.js"></script>
+    <link href="dimensionReduction_files/crosstalk/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="dimensionReduction_files/crosstalk/js/crosstalk.min.js"></script>
+    <link href="dimensionReduction_files/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="dimensionReduction_files/plotly-main/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Dimension Reduction
+### Jun Kang
+### 2022-03-20
+
+---
+
+
+
+
+
+
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig4_HTML.png?as=webp)
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+The Genome Aggregation Database (gnomAD, left) and Biobank Japan (BBJ, right) visualized using UMAP. UMAP illustrates the ancestral diversity of gnomAD, showing many the relationships between populations on continental and subcontinental levels. For the relatively more homogeneous BBJ data, it splits data geographically into the large mainland cluster (consisting of Hokkaido, Tohoku, Kanto-Koshinetsu, Chubu-Hokuriku, Kinki, and Kyushu regions), and smaller non-mainland clusters. The gnomAD image is reproduced from [10], and the BBJ image is reproduced from [12]
+
+---
+# High dimensional data
+
+* Population genetics
+* Single cell sequencing
+* Spatial transcriptomics 
+
+---
+### Dimension reduction technique
+
+* Principal component analysis (PCA)
+* t-Distributed Stochastic Neighbor Embedding (t-SNE)
+* Uniform Manifold Approximation and Projection (UMAP)
+
+---
+### Dimension reduction
+
+* Change and select basis to clustering 
+* Visualization in 2 dimensional space
+
+---
+### Concepts
+
+* Dimension
+* Basis
+* Projection
+* Latent variable (Manifold)
+* Linearity
+* Graph
+
+---
+![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig3_HTML.png?as=webp)
+
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+PCA (left) and UMAP (right) projections of the UKB data, coloured by self-identified ethnic background. Unlike PCA, UMAP focuses on preserving local relationships and emphasizes fine-scale patterns in data. Groups in the UMAP projection are less compressed showing, for example, the relative size of the British and Irish populations in the UKB, alongside populations of other ancestries, while simultaneously showing the population structure between and within groups
+
+---
+class: center
+
+![:scale 50%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig5_HTML.png?as=webp)
+
+.footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
+
+???
+UMAP projection of the same genotype data from the 1000GP comparing parametrization with a small (top) and large (bottom) number of nearest neighbours. Left images are coloured by population; right images are the same points but with the simplicial complex drawn. When adding more neighbours, subclusters become less separated, as with the LWK population, for example. Looking at the connectivity maps, we see new connections between continental groups, such as the Central/South American clusters and East Asian clusters. Darker lines indicate that individuals are closer to each other in genotype space
+
+---
+# Iris
+![](https://machinelearninghd.com/wp-content/uploads/2021/03/iris-dataset.png)
+---
+class: center
+## Iris data
+<div id="htmlwidget-599caec7067df91dbe4f" style="width:504px;height:504px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-599caec7067df91dbe4f">{"x":{"visdat":{"acc773d5b236":["function () ","plotlyVisDat"]},"cur_data":"acc773d5b236","attrs":{"acc773d5b236":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"splom","dimensions":[{"label":"sepal_width","values":{}},{"label":"sepal_length","values":{}},{"label":"petal_width","values":{}},{"label":"petal_length","values":{}}],"color":{},"colors":["#636EFA","#EF553B","#00CC96"],"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"legend":{"title":{"text":"species"}},"hovermode":"closest","dragmode":"select","plot_bgcolor":"rgba(240,240,240,0.95)","xaxis":{"domain":[],"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis":{"domain":[],"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis2":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis3":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"xaxis4":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis2":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis3":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"yaxis4":{"showline":false,"zeroline":false,"gridcolor":"#ffff","ticklen":4},"showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"type":"splom","dimensions":[{"label":"sepal_width","values":[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3]},{"label":"sepal_length","values":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5]},{"label":"petal_width","values":[0.2,0.2,0.2,0.2,0.2,0.4,0.3,0.2,0.2,0.1,0.2,0.2,0.1,0.1,0.2,0.4,0.4,0.3,0.3,0.3,0.2,0.4,0.2,0.5,0.2,0.2,0.4,0.2,0.2,0.2,0.2,0.4,0.1,0.2,0.2,0.2,0.2,0.1,0.2,0.2,0.3,0.3,0.2,0.6,0.4,0.3,0.2,0.2,0.2,0.2]},{"label":"petal_length","values":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4]}],"name":"setosa","marker":{"color":"rgba(99,110,250,1)","line":{"color":"rgba(99,110,250,1)"}},"frame":null},{"type":"splom","dimensions":[{"label":"sepal_width","values":[3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8]},{"label":"sepal_length","values":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7]},{"label":"petal_width","values":[1.4,1.5,1.5,1.3,1.5,1.3,1.6,1,1.3,1.4,1,1.5,1,1.4,1.3,1.4,1.5,1,1.5,1.1,1.8,1.3,1.5,1.2,1.3,1.4,1.4,1.7,1.5,1,1.1,1,1.2,1.6,1.5,1.6,1.5,1.3,1.3,1.3,1.2,1.4,1.2,1,1.3,1.2,1.3,1.3,1.1,1.3]},{"label":"petal_length","values":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1]}],"name":"versicolor","marker":{"color":"rgba(239,85,59,1)","line":{"color":"rgba(239,85,59,1)"}},"frame":null},{"type":"splom","dimensions":[{"label":"sepal_width","values":[3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3]},{"label":"sepal_length","values":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9]},{"label":"petal_width","values":[2.5,1.9,2.1,1.8,2.2,2.1,1.7,1.8,1.8,2.5,2,1.9,2.1,2,2.4,2.3,1.8,2.2,2.3,1.5,2.3,2,2,1.8,2.1,1.8,1.8,1.8,2.1,1.6,1.9,2,2.2,1.5,1.4,2.3,2.4,1.8,1.8,2.1,2.4,2.3,1.9,2.3,2.5,2.3,1.9,2,2.3,1.8]},{"label":"petal_length","values":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1]}],"name":"virginica","marker":{"color":"rgba(0,204,150,1)","line":{"color":"rgba(0,204,150,1)"}},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+???
+clustering 가장 좋은 2개 basis? petal 1 개?
+
+
+---
+## Dimension reducsion by human selection
+![](dimensionReduction_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+
+## Clustering? and select one dimension
+
+![](dimensionReduction_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+## Principal component analysis (PCA)
+
+![](https://ww.namu.la/s/b6449edffc0739e1fc33baf28957ae33718d8cba8dc3b5d7bb5e56c02a5abd1a4c4864d9dac8423ed5c2f2dfce0d0c14ad4a0acc1a93c3a9702fb36b0220f234b56a51de56baed232418d2a4b4f07e555cfbd30698a6ff5f11cf2a68fec01690)
+---
+## Linearity
+
+$$
+PC1 = \alpha_1v_1 + \alpha_2v_2 + \alpha_3v_3 ... \\\
+PC2 = \beta_2v_1 + \beta_2v_2 + \beta_3v_3 ... \\
+$$ 
+
+---
+class: center
+# Projection
+
+![:scale 50%](https://cdn.pixabay.com/photo/2017/09/08/15/31/marigold-2729124_1280.jpg)
+
+---
+# Orthogonality
+
+* PCs are orthogonal each other
+
+---
+# Principal component analysis (PCA)
+
+<div id="htmlwidget-c9bf9f0f3212ca95c119" style="width:504px;height:504px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c9bf9f0f3212ca95c119">{"x":{"data":[{"x":[-0.107878129475915,-0.0991256758781124,-0.112619018704969,-0.10953016321449,-0.113839088131987,-0.0988717739479014,-0.116420246442089,-0.106360699500147,-0.111209579807091,-0.104049518884768,-0.103191235785805,-0.110804228180452,-0.105674939938425,-0.125426601970102,-0.104736048615599,-0.107759601477619,-0.105157476006749,-0.104336342513111,-0.090437648059616,-0.11162536167409,-0.0911879400806897,-0.105130093152723,-0.132154698580868,-0.08663152892624,-0.106089951636316,-0.09297534775118,-0.0977057000598279,-0.103299226863694,-0.101917170819842,-0.107904742160833,-0.101943783504761,-0.0872472171845061,-0.124561903177881,-0.116522591995828,-0.100507731921964,-0.105168012927155,-0.0974196466005929,-0.120388352192299,-0.115734486880366,-0.103353222402639,-0.108915245125331,-0.0885108519101075,-0.121641449997494,-0.0935756076927842,-0.101797872652439,-0.0985913660128171,-0.113595723122182,-0.114055070287765,-0.106198712883314,-0.104978643456295],"y":[-0.0408589158360105,0.057380916914182,0.0291025357194968,0.0508490406299959,-0.0550573502828649,-0.126755849636756,-0.00405538000424925,-0.018993923226488,0.0949344889461115,0.0399215080376265,-0.088836887082972,-0.0113273650638198,0.062023476045196,0.0818415537964958,-0.158324387842385,-0.228651229919747,-0.126281898840662,-0.0416089520361787,-0.119592424851425,-0.0960003118683027,-0.0348009903479184,-0.0786593906907707,-0.0390133077633874,-0.00728257277818513,-0.0116828281608904,0.0532514185852892,-0.0206124833258478,-0.0448699264658799,-0.0266604813891562,0.0287470726224263,0.0429455070692807,-0.0360640873502077,-0.152665634531913,-0.183065709203295,0.0391714718374583,0.0175434546259828,-0.0563105198603704,-0.0504147911518509,0.0769620192674348,-0.0228864461573339,-0.0375979414063093,0.198956161780322,0.0407801045120344,-0.0402035131038843,-0.0972242988645649,0.0605234036448598,-0.0953687633671581,0.0328765709513192,-0.0849443641521261,-0.000784478149764319],"text":["PC1: -0.1078781295<br />PC2: -0.0408589158<br />Species: setosa","PC1: -0.0991256759<br />PC2:  0.0573809169<br />Species: setosa","PC1: -0.1126190187<br />PC2:  0.0291025357<br />Species: setosa","PC1: -0.1095301632<br />PC2:  0.0508490406<br />Species: setosa","PC1: -0.1138390881<br />PC2: -0.0550573503<br />Species: setosa","PC1: -0.0988717739<br />PC2: -0.1267558496<br />Species: setosa","PC1: -0.1164202464<br />PC2: -0.0040553800<br />Species: setosa","PC1: -0.1063606995<br />PC2: -0.0189939232<br />Species: setosa","PC1: -0.1112095798<br />PC2:  0.0949344889<br />Species: setosa","PC1: -0.1040495189<br />PC2:  0.0399215080<br />Species: setosa","PC1: -0.1031912358<br />PC2: -0.0888368871<br />Species: setosa","PC1: -0.1108042282<br />PC2: -0.0113273651<br />Species: setosa","PC1: -0.1056749399<br />PC2:  0.0620234760<br />Species: setosa","PC1: -0.1254266020<br />PC2:  0.0818415538<br />Species: setosa","PC1: -0.1047360486<br />PC2: -0.1583243878<br />Species: setosa","PC1: -0.1077596015<br />PC2: -0.2286512299<br />Species: setosa","PC1: -0.1051574760<br />PC2: -0.1262818988<br />Species: setosa","PC1: -0.1043363425<br />PC2: -0.0416089520<br />Species: setosa","PC1: -0.0904376481<br />PC2: -0.1195924249<br />Species: setosa","PC1: -0.1116253617<br />PC2: -0.0960003119<br />Species: setosa","PC1: -0.0911879401<br />PC2: -0.0348009903<br />Species: setosa","PC1: -0.1051300932<br />PC2: -0.0786593907<br />Species: setosa","PC1: -0.1321546986<br />PC2: -0.0390133078<br />Species: setosa","PC1: -0.0866315289<br />PC2: -0.0072825728<br />Species: setosa","PC1: -0.1060899516<br />PC2: -0.0116828282<br />Species: setosa","PC1: -0.0929753478<br />PC2:  0.0532514186<br />Species: setosa","PC1: -0.0977057001<br />PC2: -0.0206124833<br />Species: setosa","PC1: -0.1032992269<br />PC2: -0.0448699265<br />Species: setosa","PC1: -0.1019171708<br />PC2: -0.0266604814<br />Species: setosa","PC1: -0.1079047422<br />PC2:  0.0287470726<br />Species: setosa","PC1: -0.1019437835<br />PC2:  0.0429455071<br />Species: setosa","PC1: -0.0872472172<br />PC2: -0.0360640874<br />Species: setosa","PC1: -0.1245619032<br />PC2: -0.1526656345<br />Species: setosa","PC1: -0.1165225920<br />PC2: -0.1830657092<br />Species: setosa","PC1: -0.1005077319<br />PC2:  0.0391714718<br />Species: setosa","PC1: -0.1051680129<br />PC2:  0.0175434546<br />Species: setosa","PC1: -0.0974196466<br />PC2: -0.0563105199<br />Species: setosa","PC1: -0.1203883522<br />PC2: -0.0504147912<br />Species: setosa","PC1: -0.1157344869<br />PC2:  0.0769620193<br />Species: setosa","PC1: -0.1033532224<br />PC2: -0.0228864462<br />Species: setosa","PC1: -0.1089152451<br />PC2: -0.0375979414<br />Species: setosa","PC1: -0.0885108519<br />PC2:  0.1989561618<br />Species: setosa","PC1: -0.1216414500<br />PC2:  0.0407801045<br />Species: setosa","PC1: -0.0935756077<br />PC2: -0.0402035131<br />Species: setosa","PC1: -0.1017978727<br />PC2: -0.0972242989<br />Species: setosa","PC1: -0.0985913660<br />PC2:  0.0605234036<br />Species: setosa","PC1: -0.1135957231<br />PC2: -0.0953687634<br />Species: setosa","PC1: -0.1140550703<br />PC2:  0.0328765710<br />Species: setosa","PC1: -0.1061987129<br />PC2: -0.0849443642<br />Species: setosa","PC1: -0.1049786435<br />PC2: -0.0007844781<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.0524828655915756,0.034836938939905,0.0591135080448586,0.0194102775902364,0.0512297677863806,0.0185149515659939,0.0355606182760603,-0.0232134060447727,0.0442001893997177,0.000544281511547665,-0.00524915168358511,0.0209922400253547,0.0267757837479311,0.0342760163896913,-0.00158883672248587,0.0416996393134783,0.0166840852769652,0.00756484727480711,0.0583568003305263,0.00785579213029778,0.0351391908849099,0.0226877323824678,0.058789534811191,0.0301459240226477,0.0334709586605651,0.0416456437745337,0.059853263145526,0.064707034848725,0.0316674752255627,-0.00191770135240911,0.00623037107664125,0.00111715859912558,0.0115055701709907,0.0505447783937658,0.0106691310819484,0.0204418543955474,0.0499557028204179,0.0497557964291515,0.00331480929251001,0.0135033144731088,0.013293748010589,0.0297511093164155,0.0160304772442665,-0.0172524473887005,0.0137466794829134,0.00435192494192666,0.0108471934632942,0.0274560044655482,-0.0213244229896518,0.0122292495071461],"y":[-0.0734545078587749,-0.0506124310758209,-0.052458039148444,0.149331402596547,0.0177403878051105,0.0504991313512371,-0.0657978771208903,0.157675105297591,-0.00274302010309918,0.0880135933771394,0.225909436479499,0.00538756143087928,0.150209853920523,0.0158510706519384,0.0373670861955944,-0.0433305185914666,0.0167096671263463,0.0674216251946899,0.138082188562873,0.110875525009661,-0.0337553881191666,0.0355214781229713,0.0794428427028322,0.0354421004299749,0.00539748885566302,-0.0213470382829205,0.00657587981469414,-0.0282005960084119,0.0192305327806631,0.090116031697377,0.13297749301723,0.133846016916422,0.0661585281924006,0.0539514851417542,0.024494712988038,-0.0719742903080059,-0.0444360178887053,0.117717268353686,0.0186836903227767,0.113149487841147,0.0953346158675208,-0.00212139902673828,0.0841309978710773,0.171873539744446,0.0728380747568537,0.0154227158930754,0.0327636370706075,0.0131825347173547,0.131404528955102,0.0509730821473312],"text":["PC1:  0.0524828656<br />PC2: -0.0734545079<br />Species: versicolor","PC1:  0.0348369389<br />PC2: -0.0506124311<br />Species: versicolor","PC1:  0.0591135080<br />PC2: -0.0524580391<br />Species: versicolor","PC1:  0.0194102776<br />PC2:  0.1493314026<br />Species: versicolor","PC1:  0.0512297678<br />PC2:  0.0177403878<br />Species: versicolor","PC1:  0.0185149516<br />PC2:  0.0504991314<br />Species: versicolor","PC1:  0.0355606183<br />PC2: -0.0657978771<br />Species: versicolor","PC1: -0.0232134060<br />PC2:  0.1576751053<br />Species: versicolor","PC1:  0.0442001894<br />PC2: -0.0027430201<br />Species: versicolor","PC1:  0.0005442815<br />PC2:  0.0880135934<br />Species: versicolor","PC1: -0.0052491517<br />PC2:  0.2259094365<br />Species: versicolor","PC1:  0.0209922400<br />PC2:  0.0053875614<br />Species: versicolor","PC1:  0.0267757837<br />PC2:  0.1502098539<br />Species: versicolor","PC1:  0.0342760164<br />PC2:  0.0158510707<br />Species: versicolor","PC1: -0.0015888367<br />PC2:  0.0373670862<br />Species: versicolor","PC1:  0.0416996393<br />PC2: -0.0433305186<br />Species: versicolor","PC1:  0.0166840853<br />PC2:  0.0167096671<br />Species: versicolor","PC1:  0.0075648473<br />PC2:  0.0674216252<br />Species: versicolor","PC1:  0.0583568003<br />PC2:  0.1380821886<br />Species: versicolor","PC1:  0.0078557921<br />PC2:  0.1108755250<br />Species: versicolor","PC1:  0.0351391909<br />PC2: -0.0337553881<br />Species: versicolor","PC1:  0.0226877324<br />PC2:  0.0355214781<br />Species: versicolor","PC1:  0.0587895348<br />PC2:  0.0794428427<br />Species: versicolor","PC1:  0.0301459240<br />PC2:  0.0354421004<br />Species: versicolor","PC1:  0.0334709587<br />PC2:  0.0053974889<br />Species: versicolor","PC1:  0.0416456438<br />PC2: -0.0213470383<br />Species: versicolor","PC1:  0.0598532631<br />PC2:  0.0065758798<br />Species: versicolor","PC1:  0.0647070348<br />PC2: -0.0282005960<br />Species: versicolor","PC1:  0.0316674752<br />PC2:  0.0192305328<br />Species: versicolor","PC1: -0.0019177014<br />PC2:  0.0901160317<br />Species: versicolor","PC1:  0.0062303711<br />PC2:  0.1329774930<br />Species: versicolor","PC1:  0.0011171586<br />PC2:  0.1338460169<br />Species: versicolor","PC1:  0.0115055702<br />PC2:  0.0661585282<br />Species: versicolor","PC1:  0.0505447784<br />PC2:  0.0539514851<br />Species: versicolor","PC1:  0.0106691311<br />PC2:  0.0244947130<br />Species: versicolor","PC1:  0.0204418544<br />PC2: -0.0719742903<br />Species: versicolor","PC1:  0.0499557028<br />PC2: -0.0444360179<br />Species: versicolor","PC1:  0.0497557964<br />PC2:  0.1177172684<br />Species: versicolor","PC1:  0.0033148093<br />PC2:  0.0186836903<br />Species: versicolor","PC1:  0.0135033145<br />PC2:  0.1131494878<br />Species: versicolor","PC1:  0.0132937480<br />PC2:  0.0953346159<br />Species: versicolor","PC1:  0.0297511093<br />PC2: -0.0021213990<br />Species: versicolor","PC1:  0.0160304772<br />PC2:  0.0841309979<br />Species: versicolor","PC1: -0.0172524474<br />PC2:  0.1718735397<br />Species: versicolor","PC1:  0.0137466795<br />PC2:  0.0728380748<br />Species: versicolor","PC1:  0.0043519249<br />PC2:  0.0154227159<br />Species: versicolor","PC1:  0.0108471935<br />PC2:  0.0327636371<br />Species: versicolor","PC1:  0.0274560045<br />PC2:  0.0131825347<br />Species: versicolor","PC1: -0.0213244230<br />PC2:  0.1314045290<br />Species: versicolor","PC1:  0.0122292495<br />PC2:  0.0509730821<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[0.0878652326325491,0.0551551850871601,0.105046920722381,0.0686009480683305,0.0889724195854224,0.131084284812907,0.0174827273128329,0.109675697646398,0.0955876337220434,0.107643507349145,0.0649819039397037,0.0763428987016345,0.089738787371008,0.0600250325548711,0.0699106383426149,0.0757426387600303,0.0700909951900716,0.11557712191942,0.157703538614414,0.0601989737090692,0.0970657263064202,0.0465856852669593,0.138028363579451,0.0635079325824746,0.0810137166272321,0.0930934993290626,0.0559755484116904,0.0486325337117663,0.085187267612814,0.0887740374911589,0.11603559223585,0.109794225644694,0.0887290545756177,0.0530719411649235,0.0572792906977902,0.133318208262463,0.0750842620523338,0.0641300365339994,0.0440536310995459,0.0882213573952407,0.0959746151180589,0.0905906547767123,0.0551551850871601,0.0972011002383356,0.095180864478447,0.0891006076549713,0.0745281081771179,0.0724602925715432,0.0653921469625978,0.0457604305461734],"y":[-0.0740885430097093,0.0594864224029415,-0.0478372218236795,0.0039994906983625,-0.025113632739749,-0.0681292503710733,0.132912042130432,-0.0357551525032606,0.0605562530877328,-0.163512609219446,-0.0589660612016485,0.0358943094198193,-0.0356857022350479,0.0989293115880431,0.0376452840244006,-0.0575606222693542,-0.0217580248420059,-0.217617956222712,-0.00151347928852529,0.145274795929447,-0.0774971877196775,0.0486674500848119,-0.0352083100453741,0.0410108193469274,-0.0863030268353496,-0.0857800386084448,0.0269308725990966,-0.00547700692448142,0.0159478165447124,-0.0478610760546611,-0.0220697788585274,-0.223547466586997,0.0151977803445442,0.0249329951716847,0.0690575534938273,-0.0729294072071379,-0.0909555133911473,-0.0359564592888603,-0.00146599629461207,-0.0575506948445704,-0.0522527329814302,-0.0586953041478362,0.0594864224029415,-0.0738416401868786,-0.0893031716360222,-0.0329377886074678,0.0763242102031361,-0.0229026341452717,-0.0860759788620863,0.00207106353916324],"text":["PC1:  0.0878652326<br />PC2: -0.0740885430<br />Species: virginica","PC1:  0.0551551851<br />PC2:  0.0594864224<br />Species: virginica","PC1:  0.1050469207<br />PC2: -0.0478372218<br />Species: virginica","PC1:  0.0686009481<br />PC2:  0.0039994907<br />Species: virginica","PC1:  0.0889724196<br />PC2: -0.0251136327<br />Species: virginica","PC1:  0.1310842848<br />PC2: -0.0681292504<br />Species: virginica","PC1:  0.0174827273<br />PC2:  0.1329120421<br />Species: virginica","PC1:  0.1096756976<br />PC2: -0.0357551525<br />Species: virginica","PC1:  0.0955876337<br />PC2:  0.0605562531<br />Species: virginica","PC1:  0.1076435073<br />PC2: -0.1635126092<br />Species: virginica","PC1:  0.0649819039<br />PC2: -0.0589660612<br />Species: virginica","PC1:  0.0763428987<br />PC2:  0.0358943094<br />Species: virginica","PC1:  0.0897387874<br />PC2: -0.0356857022<br />Species: virginica","PC1:  0.0600250326<br />PC2:  0.0989293116<br />Species: virginica","PC1:  0.0699106383<br />PC2:  0.0376452840<br />Species: virginica","PC1:  0.0757426388<br />PC2: -0.0575606223<br />Species: virginica","PC1:  0.0700909952<br />PC2: -0.0217580248<br />Species: virginica","PC1:  0.1155771219<br />PC2: -0.2176179562<br />Species: virginica","PC1:  0.1577035386<br />PC2: -0.0015134793<br />Species: virginica","PC1:  0.0601989737<br />PC2:  0.1452747959<br />Species: virginica","PC1:  0.0970657263<br />PC2: -0.0774971877<br />Species: virginica","PC1:  0.0465856853<br />PC2:  0.0486674501<br />Species: virginica","PC1:  0.1380283636<br />PC2: -0.0352083100<br />Species: virginica","PC1:  0.0635079326<br />PC2:  0.0410108193<br />Species: virginica","PC1:  0.0810137166<br />PC2: -0.0863030268<br />Species: virginica","PC1:  0.0930934993<br />PC2: -0.0857800386<br />Species: virginica","PC1:  0.0559755484<br />PC2:  0.0269308726<br />Species: virginica","PC1:  0.0486325337<br />PC2: -0.0054770069<br />Species: virginica","PC1:  0.0851872676<br />PC2:  0.0159478165<br />Species: virginica","PC1:  0.0887740375<br />PC2: -0.0478610761<br />Species: virginica","PC1:  0.1160355922<br />PC2: -0.0220697789<br />Species: virginica","PC1:  0.1097942256<br />PC2: -0.2235474666<br />Species: virginica","PC1:  0.0887290546<br />PC2:  0.0151977803<br />Species: virginica","PC1:  0.0530719412<br />PC2:  0.0249329952<br />Species: virginica","PC1:  0.0572792907<br />PC2:  0.0690575535<br />Species: virginica","PC1:  0.1333182083<br />PC2: -0.0729294072<br />Species: virginica","PC1:  0.0750842621<br />PC2: -0.0909555134<br />Species: virginica","PC1:  0.0641300365<br />PC2: -0.0359564593<br />Species: virginica","PC1:  0.0440536311<br />PC2: -0.0014659963<br />Species: virginica","PC1:  0.0882213574<br />PC2: -0.0575506948<br />Species: virginica","PC1:  0.0959746151<br />PC2: -0.0522527330<br />Species: virginica","PC1:  0.0905906548<br />PC2: -0.0586953041<br />Species: virginica","PC1:  0.0551551851<br />PC2:  0.0594864224<br />Species: virginica","PC1:  0.0972011002<br />PC2: -0.0738416402<br />Species: virginica","PC1:  0.0951808645<br />PC2: -0.0893031716<br />Species: virginica","PC1:  0.0891006077<br />PC2: -0.0329377886<br />Species: virginica","PC1:  0.0745281082<br />PC2:  0.0763242102<br />Species: virginica","PC1:  0.0724602926<br />PC2: -0.0229026341<br />Species: virginica","PC1:  0.0653921470<br />PC2: -0.0860759789<br />Species: virginica","PC1:  0.0457604305<br />PC2:  0.0020710635<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.3059360730594,"r":7.30593607305936,"b":37.2602739726027,"l":48.9497716894977},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.146647610440632,0.172196450474178],"tickmode":"array","ticktext":["-0.1","0.0","0.1"],"tickvals":[-0.1,0,0.1],"categoryorder":"array","categoryarray":["-0.1","0.0","0.1"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"PC1 (72.96%)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-0.251379263239709,0.248637469799461],"tickmode":"array","ticktext":["-0.2","-0.1","0.0","0.1","0.2"],"tickvals":[-0.2,-0.1,0,0.1,0.2],"categoryorder":"array","categoryarray":["-0.2","-0.1","0.0","0.1","0.2"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"PC2 (22.85%)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"b515749e8ce3":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"b515749e8ce3","visdat":{"b515749e8ce3":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+# Latent variable
+* Linear
+* Non-linear
+* Manifold
+* Graph
+
+---
+# Non-linear
+
+![](http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA_files/linear_vs_nonlinear.png)
+
+.footer[http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA/]
+---
+## Non-linear
+
+* Lower dimension to higher dimension
+* Gausian Kernel
+
+---
+class .center
+
+### Simplicial complex
+![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
+---
+
+## Graph Embedding
+
+![](https://gearons.org/assets/img/mage_example.png)
+
+.footer[https://gearons.org/blog/2016/MAGE/]
+
+---
+## Graph
+
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_raw_data.png)
+
+.footer[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html]
+
+---
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_open_cover.png)
+
+---
+## Graph
+
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_basic_graph.png)
+---
+## Graph
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_open_cover.png)
+---
+# Graph
+![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_graph.png)
+---
+## t-Distributed Stochastic Neighbor Embedding (t-SNE)
+<div id="htmlwidget-74c3a3791a1f0b9501e1" style="width:504px;height:504px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-74c3a3791a1f0b9501e1">{"x":{"visdat":{"a4a22d00dbdd":["function () ","plotlyVisDat"]},"cur_data":"a4a22d00dbdd","attrs":{"a4a22d00dbdd":{"x":{},"y":{},"mode":"markers","split":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"plot_bgcolor":"#e5ecf6","xaxis":{"domain":[0,1],"automargin":true,"title":"X1"},"yaxis":{"domain":[0,1],"automargin":true,"title":"X2"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[16.8501799015544,12.2419707431669,12.7389042452187,10.985510463194,16.768915148956,20.0327597804375,13.3327111055609,15.5019859352189,9.36038293192939,12.9193030266519,19.5785533163529,14.1410636200185,11.6697102259401,9.68325586746443,20.4422418925818,20.5249555076342,19.6778869137288,16.9892805019045,20.3148266095808,18.2903039025338,18.1685100375904,17.8525468008885,14.7219931077464,15.1744447377824,13.4613480938305,12.3024254997649,15.4250848618059,17.5182061735687,17.1206683929765,11.816009576516,11.6045096890443,18.1569624409735,19.6623469948494,20.3728120126149,12.7224766895046,14.3458055364902,18.9723188223222,16.0466705918501,9.79079209946312,16.2609412034265,16.1106514577366,8.24306137783272,10.5822264615583,16.1492557210385,18.7019493616602,11.2965877290528,18.551748137556,11.858260802025,19.2331369307418,14.8701719851948],"y":[1.84930251229252,-0.98035224582759,-1.43057959018034,-1.67343652761118,2.27502690666543,3.54030919530399,-1.00443074677809,0.742817336970747,-1.85480473080563,-0.626330906978764,3.04607405965107,-0.171044223049305,-1.40904549082229,-1.76787673841143,5.33760768270938,5.55379902850898,4.18856139384122,1.30324686369754,4.16174528168001,3.00016383140553,1.22022188827954,2.42785853051804,1.53741180320254,-0.324524336557616,0.127938111490308,0.0171948616384038,0.0769984778607891,1.84450971060063,1.07611662586767,-0.55449264805197,-0.337188022898399,1.72368711034696,4.21009619844426,5.14136020868614,-0.340912298700595,0.722985539699719,3.2257025798927,1.88574480444901,-1.73383966540554,0.82278051353481,1.60850533110901,-2.1937102672093,-1.24357438035054,0.184482043880684,1.58675186451862,-0.951011288694009,2.54589489917869,-1.6492085358001,2.67154323373487,0.565333371818932],"mode":"markers","type":"scatter","name":"setosa","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-13.9726621806717,-11.4698960211568,-13.5042330654504,0.812003791143721,-9.13644975380658,-2.64229121698425,-11.4114104874551,2.45755515380508,-10.8453183345102,0.696248144957637,2.39248263752558,-5.92144114352387,-0.825556516591418,-6.61672351023486,-2.58168889883295,-12.6373930936329,-3.3147194079663,-2.62750280527957,-2.17023589186079,-0.204501671534027,-7.29508197695227,-6.09429927292112,-5.1793278218552,-5.83566667273255,-9.6985984385342,-11.5287008185127,-11.590449639667,-12.2678308764778,-5.80830384131789,-1.62394660220301,0.720635135127647,0.781767206135576,-2.62109939060596,-4.29197356312827,-1.94014837073205,-10.1657994115687,-12.6037875452486,-3.43853963413825,-3.35010103569791,0.134427085400139,-0.390821932847921,-7.39653154553446,-1.93969595011147,2.45073174439119,-1.33052498616765,-4.07690598428019,-3.40645217802746,-7.64299745729801,1.83644867090675,-2.61134606730351],"y":[4.47149307254141,3.64295202787613,3.88946583131701,-4.20057288344161,1.58322753422763,-2.15867582978764,3.08947957328452,-4.16974478941733,2.78074448148681,-3.47336901875243,-4.95367668856865,0.934279103512032,-2.54358520413485,-0.14018494044832,0.555500684568635,4.23422470794149,-1.67954135978246,-0.60469627191171,-3.6986388064092,-2.53434954083106,-0.0952831168792512,1.27571537113877,-2.88075376055263,-0.55383625108999,2.51680200480912,3.73394940600104,2.37522950590247,2.16514827309596,-0.119588573811361,-0.106783751395041,-3.23157724049568,-2.90010619120645,-0.18070137050701,-3.68062767681828,-2.56250206778827,2.75774434241393,3.70355524670786,-2.13714841843161,0.00744559656421135,-3.42013272003091,-3.72762896059915,0.806331115554069,-1.22476557591246,-4.19190121323686,-2.30454677230443,0.237903852031468,-0.533765452105793,1.47637283892431,-3.12641824025328,-0.910129560640096],"mode":"markers","type":"scatter","name":"versicolor","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"line":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-10.999578076126,-2.73843858758863,-15.1552172160797,-8.22686645571603,-10.7270885188366,-16.8727788453452,1.93637802536688,-15.8501807553325,-8.39706820316962,-16.7887100237356,-12.3266919192206,-7.51170765685842,-13.3221177071496,-1.15238431856086,-3.3276152377495,-11.9109895311544,-11.2514019709774,-17.1421728778153,-16.7241283069556,-1.17749920100024,-14.9191246146933,-2.14706915245854,-16.8450347130457,-6.62278216962039,-14.278964590398,-15.9030520881871,-6.58096657228682,-7.35295027196389,-8.36619049598412,-15.1843006822994,-15.7557331773719,-17.1621481844786,-8.37374764815468,-7.37877299198302,-3.83120061761282,-16.7740749849264,-12.6556839829033,-11.2320448562818,-6.55633043197337,-14.1702659629644,-13.4040900967413,-14.0250370183616,-2.73843858758863,-14.6972745931041,-14.4593814265351,-12.5726133947267,-4.89348122782081,-11.1822552305401,-11.8818609877039,-5.79884138635734],"y":[-1.84481450199189,-4.74297186775122,1.25870371472882,-2.6503353904018,-1.85432332924525,2.30442493294227,-5.17401341475556,1.16170079973933,-3.56352825130246,3.50897301409844,1.76397611427226,-2.79182093811264,0.62679773803892,-5.27620603537689,-4.70491664757465,0.106633057788801,-0.661729570877822,4.76068331542446,0.671296098647586,-5.23687292921264,1.89771165423024,-4.52040939822506,1.76274434413481,-1.95613079397846,1.63777702819867,2.88669373598337,-1.39549905288859,-0.814215049749454,-3.11333140603788,2.61441414401856,1.44558714842553,4.84310376832861,-3.21953210283181,-1.44152892284173,-4.67784801615363,3.17651391587278,-0.174059590806448,-0.534526431448862,-0.997528657234443,2.25098086496849,0.0887436493272334,2.78149222374265,-4.74297186775122,0.641487588212665,1.08934066178333,0.724219378889676,-3.56412546350662,0.0612589373011845,0.0886401285343607,-2.66839980727708],"mode":"markers","type":"scatter","name":"virginica","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"line":{"color":"rgba(44,160,44,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+---
+## Uniform Manifold Approximation and Projection (UMAP)
+<div id="htmlwidget-3d25b59fdd91143f1907" style="width:504px;height:504px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d25b59fdd91143f1907">{"x":{"visdat":{"a4a2666f133a":["function () ","plotlyVisDat"]},"cur_data":"a4a2666f133a","attrs":{"a4a2666f133a":{"x":{},"y":{},"mode":"markers","color":{},"colors":["#636EFA","#EF553B","#00CC96"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"plot_bgcolor":"#e5ecf6","legend":{"title":{"text":"species"}},"xaxis":{"domain":[0,1],"automargin":true,"title":"0"},"yaxis":{"domain":[0,1],"automargin":true,"title":"1"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[14.1094414550233,14.4223654299417,14.0590117833588,14.102451872616,13.8905065087832,13.4972559339589,14.2694584658572,13.9762123213454,14.2308159001444,14.1723493555274,13.672172704001,13.7959295250419,14.211077996373,14.1161503128154,13.574082871022,13.7366084289184,13.5334727358218,13.9531112815975,13.6703489853726,13.5243734967834,14.1099434443916,13.3648386648515,14.4780007221307,13.9813757433587,13.7898935493089,14.3761826497945,13.7826429952326,14.0723413554278,14.2654944199357,13.9367871516638,14.0299296681174,14.166270575612,13.2641570687291,13.5842860508107,14.2710973838049,14.2800341982498,13.9954954122164,13.7675842904171,14.0844034850202,14.2248886358269,13.9782022480829,14.2685594447652,14.0311786946254,13.549320601842,13.2341082469795,14.2235269949246,13.3304969300943,13.9129069598983,13.6236120839166,14.1542314597312],"y":[1.26607130134418,2.72462237033804,3.15935262008049,3.30659687813219,1.41773654883342,0.406710611912152,3.24965711602071,1.71686366283467,3.62849973633835,2.9450421140796,0.435700001038976,2.20244548227176,3.06464845631136,3.70799899311738,0.0154878127033378,-0.0050234992162923,0.208666093936591,1.15967362078967,0.135221028554338,0.657726439899678,0.666625903156541,0.995819182337478,3.00189418455493,1.62625843749195,2.2832123863359,2.64934621050245,1.72746906067343,0.897642265205909,1.17120924842537,2.95656850004151,2.84981487913661,0.760996495504225,0.215608635077746,-0.0337583667685146,2.62113112711125,2.09827082303026,0.409856422394411,1.25731558623595,3.77534776630315,1.48949707077447,1.3725096176679,3.72224134682271,3.40930671682027,1.53661430106274,0.746439384178485,3.2219943116182,0.561418055710387,3.44630256025355,0.457194528875844,1.78407265422713],"mode":"markers","type":"scatter","name":"setosa","marker":{"color":"rgba(99,110,250,1)","line":{"color":"rgba(99,110,250,1)"}},"textfont":{"color":"rgba(99,110,250,1)"},"error_y":{"color":"rgba(99,110,250,1)"},"error_x":{"color":"rgba(99,110,250,1)"},"line":{"color":"rgba(99,110,250,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-8.92104108749944,-8.32259220070141,-9.03912793863039,-5.74687571116214,-8.41555243661672,-6.8794717263054,-8.36284297343028,-4.94453352756343,-8.60661881024847,-5.58686540121026,-4.91834800247389,-6.98386778746745,-5.80817757670336,-7.75270955479317,-5.58296282245835,-8.62084237338164,-6.95764473359637,-6.06937019867667,-7.61477329364515,-5.53449734241766,-8.58520141517385,-6.59575985435986,-7.85839193769464,-7.69512741289055,-8.02636819603129,-8.48908412736873,-8.84455575248302,-9.161670653089,-7.42556149343719,-5.3955346842377,-5.39953631387134,-5.28997974807751,-5.9941254358151,-8.34158817408855,-6.85239688635334,-8.19642244320631,-8.8915740255409,-7.51812952724357,-6.56550692708416,-5.62739680529151,-6.33128893799207,-7.87460609705015,-5.95407548968669,-4.83306546995591,-6.31779955802757,-6.66498888317268,-6.62520138499611,-7.55209708934216,-4.99021438161059,-6.32382989570942],"y":[-2.17411320584811,-2.30338781524474,-2.23642541683121,-3.49953087567009,-2.3790431640103,-3.52627665455701,-1.77463867595533,-3.33803542249732,-2.35808721401989,-3.54034690433297,-3.33965843874768,-3.37293044560223,-3.36427036407459,-2.2647820776741,-3.35503358279377,-2.61149452307316,-3.58590484298982,-3.6176654363741,-1.60310065280726,-3.43312769918333,-1.03310700098452,-3.15496214302927,-0.563206597011251,-2.32386247554311,-2.56771363649448,-2.49605850413401,-2.34554645610516,-1.84367372143713,-2.52196568737069,-3.1466479623215,-3.42343468303636,-3.26034118715343,-3.39861830874761,-0.356912169802162,-3.76214297442855,-1.76042542774419,-2.2589664043765,-1.96698657809919,-3.87544145584574,-3.61741238262617,-3.59337153341351,-2.28846214066385,-3.56978951086265,-3.27191410683165,-3.68945492281846,-3.78762018744977,-3.90714383748888,-2.59347048966166,-3.24641802280508,-3.7883168177555],"mode":"markers","type":"scatter","name":"versicolor","marker":{"color":"rgba(239,85,59,1)","line":{"color":"rgba(239,85,59,1)"}},"textfont":{"color":"rgba(239,85,59,1)"},"error_y":{"color":"rgba(239,85,59,1)"},"error_x":{"color":"rgba(239,85,59,1)"},"line":{"color":"rgba(239,85,59,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[-6.492649465477,-8.85849436999165,-5.72945977614929,-7.42929363122723,-6.97997179649041,-5.14423685286739,-6.43817173476566,-5.20490282759006,-7.28211971237484,-5.63998015992432,-7.05796843838168,-7.54242522030379,-6.6657877649148,-8.99472461463404,-8.98872368152295,-6.95177460930055,-7.11159069087345,-5.0297527225358,-4.85304931856229,-7.96171842765041,-6.19405261205089,-9.08024282578279,-5.02724765551659,-8.16832583774833,-6.29954831178672,-5.49147952265297,-8.26261026492656,-8.5201114660746,-7.48264599880316,-5.45658028291126,-5.29691653868345,-5.01587577493042,-7.38940487145161,-8.06606318649196,-7.99157550225361,-5.14274286898943,-6.51287044944184,-7.3517069622381,-8.5289104273116,-6.50096877231978,-6.33498766418785,-6.74743979620352,-8.93353400678537,-6.06803070382063,-6.14918745493662,-6.74061737818622,-7.9111768795641,-7.08476905981592,-6.99667357896455,-8.65610152383237],"y":[1.98400146007112,-0.429787952867125,1.76032691095235,1.24276677444845,1.92575212566098,1.82410809303274,-3.45757627192922,1.67513608746367,1.32451062323267,2.13067520126187,1.73738590519195,1.05769998241251,1.71354133325289,-0.432794967599388,-0.412111945972905,2.1337483267712,1.15473355180238,1.76649643957531,1.82954740445107,-0.518813151659527,1.98576738016042,-0.484385128057418,1.45501785743853,-0.42537982896493,1.84747584739033,1.6991959659695,-0.766800244089985,-0.854455337142873,1.41867362045718,1.56399359786608,1.64067568641908,1.92995405355126,1.76347790326698,-0.372693329880442,0.231656759903622,1.66416763905122,2.1802789344634,1.50246022224411,-0.932664705879596,1.7756273592904,2.33621460831582,1.95874481927024,-0.428579506974185,2.1527506096454,2.1610591003334,1.96295016387108,-0.226590122931372,1.57257934815686,2.35333161923308,-0.664526767684013],"mode":"markers","type":"scatter","name":"virginica","marker":{"color":"rgba(0,204,150,1)","line":{"color":"rgba(0,204,150,1)"}},"textfont":{"color":"rgba(0,204,150,1)"},"error_y":{"color":"rgba(0,204,150,1)"},"error_x":{"color":"rgba(0,204,150,1)"},"line":{"color":"rgba(0,204,150,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macro.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
