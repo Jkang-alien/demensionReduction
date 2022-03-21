@@ -34,10 +34,22 @@ style_duo_accent(
   primary_color = "#1381B0",
   secondary_color = "#FF961C",
   inverse_header_color = "#FFFFFF",
-  text_font_size = "1.6rem"
+  text_font_size = "1.5rem"
 )
 ```
 
+##### DNA methylation-based classification of central nervous system tumours
+![:scale 60%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fnature26000/MediaObjects/41586_2018_Article_BFnature26000_Fig1_HTML.jpg?as=webp)
+
+.footer[Nature 555, 469–474 (2018). https://doi.org/10.1038/nature26000]
+
+---
+##### Sarcoma classification by DNA methylation profiling
+![:scale 60%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41467-020-20603-4/MediaObjects/41467_2020_20603_Fig1_HTML.png?as=webp)
+
+.footer[Nat Commun 12, 498 (2021). https://doi.org/10.1038/s41467-020-20603-4]
+
+---
 ![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig4_HTML.png?as=webp)
 .footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
 
@@ -65,12 +77,12 @@ The Genome Aggregation Database (gnomAD, left) and Biobank Japan (BBJ, right) vi
 * Visualization in 2 dimensional space
 
 ---
-### Concepts
+# Concepts
 
 * Dimension
 * Basis
 * Projection
-* Latent variable (Manifold)
+* Latent features
 * Linearity
 * Graph
 
@@ -85,7 +97,7 @@ PCA (left) and UMAP (right) projections of the UKB data, coloured by self-identi
 ---
 class: center
 
-![:scale 50%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig5_HTML.png?as=webp)
+![:scale 40%](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig5_HTML.png?as=webp)
 
 .footer[J Hum Genet 66, 85–91 (2021). https://doi.org/10.1038/s10038-020-00851-4]
 
@@ -94,9 +106,12 @@ UMAP projection of the same genotype data from the 1000GP comparing parametrizat
 
 ---
 # Iris
-![](https://machinelearninghd.com/wp-content/uploads/2021/03/iris-dataset.png)
+![:scale 90%](https://machinelearninghd.com/wp-content/uploads/2021/03/iris-dataset.png)
+
+.footer[/ˈpedl/,  /ˈsēpəl/]
 ---
 class: center
+
 ## Iris data
 ```{r iris}
 xfun::cache_rds({
@@ -166,8 +181,8 @@ iris %>%
 ## Linearity
 
 $$
-PC1 = \alpha_1v_1 + \alpha_2v_2 + \alpha_3v_3 ... \\\
-PC2 = \beta_2v_1 + \beta_2v_2 + \beta_3v_3 ... \\
+PC1 = \alpha_1v_1 + \alpha_2v_2 + \alpha_3v_3 ... + \alpha_nv_n\\\
+PC2 = \beta_2v_1 + \beta_2v_2 + \beta_3v_3 ... + \beta_nv_n\\
 $$ 
 
 ---
@@ -197,26 +212,94 @@ ggplotly(p)
 ```
 
 ---
-# Latent variable
+# Latent variables (features)
 * Linear
 * Non-linear
-* Manifold
+* Neighborhood
 * Graph
 
 ---
 # Non-linear
 
-![](http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA_files/linear_vs_nonlinear.png)
+![:scale 70%](http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA_files/linear_vs_nonlinear.png)
 
 .footer[http://rasbt.github.io/mlxtend/user_guide/feature_extraction/RBFKernelPCA/]
 ---
 ## Non-linear
 
-* Lower dimension to higher dimension
-* Gausian Kernel
+* Feature expansion: Lower dimension to higher dimension
+* Gaussian Kernel (Radial basis function kernel)
 
 ---
-class .center
+![:scale 50%](https://gregorygundersen.com/image/kerneltrick/idea.png)
+
+The "lifting trick". (a) A binary classification problem that is not linearly separable in $\mathbb{R}^2$ 
+(b) A lifting of the data into $\mathbb{R}^3$ using a polynomial kernel, $\varphi([x_1 \;\; x_2]) = [x_1^2 \;\; x_2^2 \;\; \sqrt{2} x_1 x_2]$
+
+Polynomial kernal $(x_1 + x_2)^2 = x_1^2 + x_2^2 + 2x_1x_2$
+
+.footer[https://gregorygundersen.com/blog/2019/12/10/kernel-trick/]
+
+---
+## Gaussian kernel
+
+![](https://gregorygundersen.com/image/rff/motivation.png)
+.footer[https://gregorygundersen.com/blog/2019/12/23/random-fourier-features/]
+
+---
+class: center
+## Gaussian kernel
+
+![:scale 35%](https://miro.medium.com/max/700/1*H2AFUdKjGEzDIW4bbbVdjg.png)
+
+.footer[https://towardsdatascience.com/an-introduction-to-kernel-methods-9c16fc8fefd2]
+
+---
+## t-Distributed Stochastic Neighbor Embedding (t-SNE)
+
+
+.footer[https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf]
+
+---
+## Similarity scores
+
+![:scale 60%](https://miro.medium.com/max/700/1*aUZyqZ9i7vKjNvpG3mhH3A.png)
+
+.footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
+
+---
+## Similarity matrix (High dimension)
+
+![:scale 60%](https://miro.medium.com/max/700/1*hRF9ceYl6j-qkxoQbvqoHw.png)
+.footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
+
+---
+## Similarity matrix (low dimension initial)
+
+![:scale 60%](https://miro.medium.com/max/700/1*oVWQY7UTS_DT0qMjQPqjwQ.png)
+.footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
+
+---
+##  minimize the Kullback–Leibler divergence (KL divergence) through gradient descent.
+
+
+---
+## Perplexity
+
+![:scale 35%](https://miro.medium.com/max/700/1*H2AFUdKjGEzDIW4bbbVdjg.png)
+
+---
+## Perplexity
+
+![](https://miro.medium.com/max/700/1*KNd4MHXTm6rre2RFZMnpFA.gif)
+.footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
+
+---
+![](https://distill.pub/2016/misread-tsne/)
+
+.footer[https://distill.pub/2016/misread-tsne/]
+---
+class: center
 
 ### Simplicial complex
 ![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
