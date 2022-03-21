@@ -5,6 +5,7 @@ author:
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
+    self_contained: true
     css: xaringan-themer.css
     nature:
       beforeInit: "macro.js"
@@ -215,7 +216,7 @@ ggplotly(p)
 # Latent variables (features)
 * Linear
 * Non-linear
-* Neighborhood
+* Neighbor
 * Graph
 
 ---
@@ -256,6 +257,8 @@ class: center
 
 ---
 ## t-Distributed Stochastic Neighbor Embedding (t-SNE)
+
+* Nearest neighbor graph
 
 
 .footer[https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf]
