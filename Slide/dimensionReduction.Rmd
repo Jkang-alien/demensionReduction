@@ -248,6 +248,9 @@ Polynomial kernal $(x_1 + x_2)^2 = x_1^2 + x_2^2 + 2x_1x_2$
 .footer[https://gregorygundersen.com/blog/2019/12/23/random-fourier-features/]
 
 ---
+# Kernel PCA
+
+---
 class: center
 ## Gaussian kernel
 
@@ -258,13 +261,35 @@ class: center
 ---
 ## t-Distributed Stochastic Neighbor Embedding (t-SNE)
 
-* Nearest neighbor graph
-
-
 .footer[https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf]
 
 ---
-## Similarity scores
+![:scale 70%](img/lec08_1.png)
+.footer[https://www.cs.cornell.edu/courses/cs4786/2020sp/lectures/lec08.pdf]
+
+---
+![:scale 70%](img/lec08_2.png)
+
+---
+![:scale 70%](img/lec08_3.png)
+
+---
+![:scale 70%](img/lec08_4.png)
+
+---
+![:scale 70%](img/lec08_5.png)
+---
+## Graph (Neighbor) Embedding
+
+![](https://gearons.org/assets/img/mage_example.png)
+
+.footer[https://gearons.org/blog/2016/MAGE/]
+
+---
+# Probablistic/Stochastic Neighbor Embedding (SNE)
+
+---
+## Similarity scores (probablistic/stochastic)
 
 ![:scale 60%](https://miro.medium.com/max/700/1*aUZyqZ9i7vKjNvpG3mhH3A.png)
 
@@ -283,8 +308,10 @@ class: center
 .footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
 
 ---
-##  minimize the Kullback–Leibler divergence (KL divergence) through gradient descent.
+##  Minimize the Kullback–Leibler divergence (KL divergence) through gradient descent.
 
+* Learning rate
+* Iteration number
 
 ---
 ## Perplexity
@@ -306,34 +333,65 @@ class: center
 
 ### Simplicial complex
 ![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
----
-
-## Graph Embedding
-
-![](https://gearons.org/assets/img/mage_example.png)
-
-.footer[https://gearons.org/blog/2016/MAGE/]
 
 ---
-## Graph
+## Making Graph
 
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_raw_data.png)
 
 .footer[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html]
 
 ---
+## Making Graph
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_open_cover.png)
 
 ---
-## Graph
+## Making Graph
 
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_basic_graph.png)
 ---
-## Graph
+## Making fuzzy Graph
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_open_cover.png)
 ---
-# Graph
+# Making Weighted Graph
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_graph.png)
+---
+
+## Minimize cross entropy 
+
+$$
+\sum_{e\in E} w_h(e) \log\left(\frac{w_h(e)}{w_l(e)}\right) + (1 - w_h(e)) \log\left(\frac{1 - w_h(e)}{1 - w_l(e)}\right)
+$$
+
+---
+# Similar and different with t-SNE
+
+* Similarity 
+  + Exponential probability distribution 
+* Minimize cross entropy
+  + Gradient descent
+
+---
+## Parameters of UMAP
+
+* Number of neighbors
+* Learning rate
+* Number of epoch
+
+---
+# Principal component analysis (PCA)
+
+```{r}
+library(plotly)
+library(ggfortify)
+
+df <- iris[1:4]
+pca_res <- prcomp(df, scale. = TRUE)
+
+p <- autoplot(pca_res, data = iris, colour = 'Species')
+
+ggplotly(p)
+```
 ---
 ## t-Distributed Stochastic Neighbor Embedding (t-SNE)
 ```{r tsne}
