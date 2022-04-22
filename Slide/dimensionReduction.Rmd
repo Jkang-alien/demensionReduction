@@ -5,7 +5,7 @@ author:
 date: '`r Sys.Date()`'
 output:
   xaringan::moon_reader:
-    self_contained: true
+    self_contained: false
     css: xaringan-themer.css
     nature:
       beforeInit: "macro.js"
@@ -177,7 +177,7 @@ iris %>%
 ---
 ## Principal component analysis (PCA)
 
-![](https://ww.namu.la/s/b6449edffc0739e1fc33baf28957ae33718d8cba8dc3b5d7bb5e56c02a5abd1a4c4864d9dac8423ed5c2f2dfce0d0c14ad4a0acc1a93c3a9702fb36b0220f234b56a51de56baed232418d2a4b4f07e555cfbd30698a6ff5f11cf2a68fec01690)
+![](img/pca.jpg)
 ---
 ## Linearity
 
@@ -216,8 +216,6 @@ ggplotly(p)
 # Latent variables (features)
 * Linear
 * Non-linear
-* Neighbor
-* Graph
 
 ---
 # Non-linear
@@ -242,31 +240,19 @@ Polynomial kernal $(x_1 + x_2)^2 = x_1^2 + x_2^2 + 2x_1x_2$
 .footer[https://gregorygundersen.com/blog/2019/12/10/kernel-trick/]
 
 ---
-## Gaussian kernel
+## Kernel basis functions (Eigenfunctions)
 
-![](https://gregorygundersen.com/image/rff/motivation.png)
-.footer[https://gregorygundersen.com/blog/2019/12/23/random-fourier-features/]
+![](https://www.researchgate.net/profile/Ann-Lee-16/publication/297891697/figure/fig2/AS:348234376597505@1460036953250/Uniform-distribution-U-1-1-Eigenfunctions-of-a-third-order-polynomial-kernel-left.png)
 
----
-# Kernel PCA
+.footer[Electronic Journal of Statistics. 10. 423-463. 10.1214/16-EJS1112.]
 
----
-class: center
-## Gaussian kernel
-
-![:scale 35%](https://miro.medium.com/max/700/1*H2AFUdKjGEzDIW4bbbVdjg.png)
-
-.footer[https://towardsdatascience.com/an-introduction-to-kernel-methods-9c16fc8fefd2]
-
----
-## t-Distributed Stochastic Neighbor Embedding (t-SNE)
-
-.footer[https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf]
 
 ---
 ![:scale 70%](img/lec08_1.png)
 .footer[https://www.cs.cornell.edu/courses/cs4786/2020sp/lectures/lec08.pdf]
 
+???
+Basis가 manifold 개념으로 
 ---
 ![:scale 70%](img/lec08_2.png)
 
@@ -278,6 +264,13 @@ class: center
 
 ---
 ![:scale 70%](img/lec08_5.png)
+
+
+---
+## t-Distributed Stochastic Neighbor Embedding (t-SNE)
+
+.footer[https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf]
+
 ---
 ## Graph (Neighbor) Embedding
 
@@ -335,18 +328,18 @@ class: center
 ![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
 
 ---
-## Making Graph
+## Making simplicial complex (Manifold)
 
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_raw_data.png)
 
 .footer[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html]
 
 ---
-## Making Graph
+## Making simplicial complex (Manifold)
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_open_cover.png)
 
 ---
-## Making Graph
+## Making simplicial complex (Manifold)
 
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_basic_graph.png)
 ---
@@ -437,4 +430,4 @@ figUmap <- plot_ly(final, x = ~X1, y = ~X2, color = ~iris$Species, colors = c('#
 })
 ```
 
-
+.footer[http://mlss2018.net.ar/slides/Pfau-1.pdf]
