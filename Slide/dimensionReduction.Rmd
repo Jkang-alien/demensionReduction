@@ -81,11 +81,11 @@ The Genome Aggregation Database (gnomAD, left) and Biobank Japan (BBJ, right) vi
 # Concepts
 
 * Dimension
-* Basis
-* Projection
-* Latent features
-* Linearity
+* Basis or Latent features
 * Graph
+* Projection or Embedding
+* Linearity
+
 
 ---
 ![](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs10038-020-00851-4/MediaObjects/10038_2020_851_Fig3_HTML.png?as=webp)
@@ -115,9 +115,9 @@ class: center
 
 ## Iris data
 ```{r iris}
-xfun::cache_rds({
 library(tidyverse)
 library(stats) 
+library(plotly)
 data(iris) 
 X <- subset(iris, select = -c(Species)) 
 axis = list(showline=FALSE, 
@@ -150,7 +150,6 @@ figRaw <- fig %>%
     yaxis3=axis, 
     yaxis4=axis 
   ) 
-})
 ```
 ???
 clustering 가장 좋은 2개 basis? petal 1 개?
@@ -284,20 +283,20 @@ Basis가 manifold 개념으로
 ---
 ## Similarity scores (probablistic/stochastic)
 
-![:scale 60%](https://miro.medium.com/max/700/1*aUZyqZ9i7vKjNvpG3mhH3A.png)
+![:scale 60%](img/tsne1.png)
 
 .footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
 
 ---
 ## Similarity matrix (High dimension)
 
-![:scale 60%](https://miro.medium.com/max/700/1*hRF9ceYl6j-qkxoQbvqoHw.png)
+![:scale 60%](img/tsne2.png)
 .footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
 
 ---
 ## Similarity matrix (low dimension initial)
 
-![:scale 60%](https://miro.medium.com/max/700/1*oVWQY7UTS_DT0qMjQPqjwQ.png)
+![:scale 60%](img/tsne3.png)
 .footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
 
 ---
@@ -309,12 +308,12 @@ Basis가 manifold 개념으로
 ---
 ## Perplexity
 
-![:scale 35%](https://miro.medium.com/max/700/1*H2AFUdKjGEzDIW4bbbVdjg.png)
+![:scale 35%](img/tsne4.png)
 
 ---
 ## Perplexity
 
-![](https://miro.medium.com/max/700/1*KNd4MHXTm6rre2RFZMnpFA.gif)
+![](img/tsne1.gif)
 .footer[https://towardsdatascience.com/t-sne-machine-learning-algorithm-a-great-tool-for-dimensionality-reduction-in-python-ec01552f1a1e]
 
 ---
@@ -328,25 +327,15 @@ class: center
 ![:scale 50%](https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Simplicial_complex_example.svg/1920px-Simplicial_complex_example.svg.png)
 
 ---
-## Making simplicial complex (Manifold)
+## Test data set of a noisy sine wave
 
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_raw_data.png)
 
 .footer[https://umap-learn.readthedocs.io/en/latest/how_umap_works.html]
 
----
-## Making simplicial complex (Manifold)
-![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_open_cover.png)
 
 ---
-## Making simplicial complex (Manifold)
-
-![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_basic_graph.png)
----
-## Making fuzzy Graph
-![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_open_cover.png)
----
-# Making Weighted Graph
+# Graph with combined edge weights
 ![](https://umap-learn.readthedocs.io/en/latest/_images/how_umap_works_umap_graph.png)
 ---
 
@@ -368,6 +357,7 @@ $$
 ## Parameters of UMAP
 
 * Number of neighbors
+* Minimal distance
 * Learning rate
 * Number of epoch
 
