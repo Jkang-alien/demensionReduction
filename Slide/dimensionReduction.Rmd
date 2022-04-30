@@ -2,10 +2,10 @@
 title: "Dimension Reduction"
 author: 
   - "Jun Kang"
-date: '`r Sys.Date()`'
+date: '2022.05.02'
 output:
   xaringan::moon_reader:
-    self_contained: false
+    self_contained: true
     css: xaringan-themer.css
     nature:
       beforeInit: "macro.js"
@@ -113,8 +113,9 @@ UMAP projection of the same genotype data from the 1000GP comparing parametrizat
 ---
 class: center
 
-## Iris data
-```{r iris}
+## Iris data 
+
+```{r iris, fig.align = 'center' }
 library(tidyverse)
 library(stats) 
 library(plotly)
@@ -150,6 +151,8 @@ figRaw <- fig %>%
     yaxis3=axis, 
     yaxis4=axis 
   ) 
+
+figRaw
 ```
 ???
 clustering 가장 좋은 2개 basis? petal 1 개?
@@ -344,14 +347,6 @@ class: center
 $$
 \sum_{e\in E} w_h(e) \log\left(\frac{w_h(e)}{w_l(e)}\right) + (1 - w_h(e)) \log\left(\frac{1 - w_h(e)}{1 - w_l(e)}\right)
 $$
-
----
-# Similar and different with t-SNE
-
-* Similarity 
-  + Exponential probability distribution 
-* Minimize cross entropy
-  + Gradient descent
 
 ---
 ## Parameters of UMAP
