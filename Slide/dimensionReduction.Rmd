@@ -2,7 +2,7 @@
 title: "Dimension Reduction"
 author: 
   - "Jun Kang"
-date: '2022.05.02'
+date: '2022.06.15'
 output:
   xaringan::moon_reader:
     self_contained: true
@@ -244,7 +244,7 @@ Polynomial kernal $(x_1 + x_2)^2 = x_1^2 + x_2^2 + 2x_1x_2$
 ---
 ## Kernel basis functions (Eigenfunctions)
 
-![](https://www.researchgate.net/profile/Ann-Lee-16/publication/297891697/figure/fig2/AS:348234376597505@1460036953250/Uniform-distribution-U-1-1-Eigenfunctions-of-a-third-order-polynomial-kernel-left.png)
+![](img/Eigenfunctions.png)
 
 .footer[Electronic Journal of Statistics. 10. 423-463. 10.1214/16-EJS1112.]
 
