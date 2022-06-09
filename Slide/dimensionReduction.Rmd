@@ -2,7 +2,7 @@
 title: "Dimension Reduction"
 author: 
   - "Jun Kang"
-date: '2022.05.02'
+date: '2022.06.15'
 output:
   xaringan::moon_reader:
     self_contained: true
